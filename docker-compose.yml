@@ -2,25 +2,35 @@ version: '3.8'
 
 services:
   client:
+    container_name: biaslens-client
     build:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - "5173:5173"
-    command: ["npm", "run", "dev"]
+      - "5173:80"
+    depends_on:
+      - server
+    stdin_open: true
+    tty: true
 
   server:
+    container_name: biaslens-server
     build:
       context: ./server
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    stdin_open: true
+    tty: true
     command: ["npm", "run", "dev"]
 
   analyzer:
+    container_name: biaslens-analyzer
     build:
       context: ./analyzer
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
+    stdin_open: true
+    tty: true
     command: ["python", "app.py"]
