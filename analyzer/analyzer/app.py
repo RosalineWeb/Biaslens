@@ -15,7 +15,7 @@ def analyze():
     if not text:
         return jsonify({"error": "No text provided"}), 400
 
-    # تحلیل ساده: اگر متن خیلی منفی یا خیلی مثبت باشه → ممکنه bias داشته باشه
+# Simple analysis: if the text is very negative or very positive → it might be biased
     polarity = TextBlob(text).sentiment.polarity
     subjectivity = TextBlob(text).sentiment.subjectivity
 
